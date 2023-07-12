@@ -1,10 +1,35 @@
-let userChoice;
-let computerChoice;
-let userScore = 0;
-let computerScore = 0;
+let button = document.getElementsByClassName("choice")
+
+button = Array.from(button)
+
+let userChoice,userScore = 0
+let computerScore = 0
+
+document.querySelector('#resetGame').addEventListener('click',restartGame)
+
+button.forEach(btn => {
+    btn.addEventListener('click',function(){
+        userChoice = btn.innerHTML
+
+        console.log(userChoice)
+        computerChoice = getComputerChoice()
+        console.log(computerChoice)
+
+        result = calculateResult(userChoice,computerChoice)
+
+        if(computerScore == 5){
+            console.log(`Computer Wins with the final score of ${computerScore} - ${userScore}!`)
+            restartGame()
+        }else if(userScore == 5){
+            console.log(`User Wins with the final score of ${userScore} - ${computerScore}!`)
+            restartGame()
+        }
+    })
+})        
+
 function getComputerChoice(){
-    let choice = Math.floor(Math.random() * 3)
-    switch(choice){
+    let computerChoice = Math.floor(Math.random() * 3)
+    switch(computerChoice){
         case 0:
             computerChoice = "Rock"
             break
@@ -15,63 +40,52 @@ function getComputerChoice(){
             computerChoice = "Scissor"
             break
     }
-}
-function getPlayerChoice(){
-    resp = prompt("Choose between Rock, Paper & Scissor")
-    resp = resp.toLowerCase()
-    userChoice = resp.charAt(0).toUpperCase() + resp.slice(1)
-    console.log(userChoice)
-
-    if(userChoice != "Rock" && userChoice != "Paper" && userChoice != "Scissor"){
-        alert("Incorrect Input! Check for typo.")
-        getPlayerChoice()
-    }
+    return computerChoice
 }
 
-function game(){
-    while(computerScore < 5 && userScore < 5){
-        getComputerChoice()
-        getPlayerChoice()
-        switch(userChoice){
-            case "Rock":
-                if(computerChoice == "Rock"){
-                    console.log("Computer also chose Rock. Tied! Try Again")
-                }else if(computerChoice == "Paper"){
-                    console.log("Computer chose Paper. You Lose!")
-                    computerScore += 1
-                }else{
-                    console.log("Computer chose Scissor. You Win!")
-                    userScore += 1
-                }
-                break
-            case "Paper":
-                if(computerChoice == "Rock"){
-                    console.log("Computer chose Rock. You Win!")
-                    userScore += 1
-                }else if(computerChoice == "Paper"){
-                    console.log("Computer chose Paper. Tied! Try Again")
-                }else{
-                    console.log("Computer chose Scissor. You Lose!")
-                    computerScore += 1
-                }
-                break
-            case "Scissor":
-                if(computerChoice == "Rock"){
-                    console.log("Computer also chose Rock. You Lose!")
-                    computerScore += 1
-                }else if(computerChoice == "Paper"){
-                    console.log("Computer chose Paper. You Win!")
-                    userScore += 1
-                }else{
-                    console.log("Computer chose Scissor. Tied! Try Again")
-                }
-                break
-        }
-        console.log(`Score is Computer ${computerScore} - ${userScore} User`)
+function calculateResult(userChoice,computerChoice){
+    switch(userChoice){
+        case "Rock":
+            if(computerChoice == "Rock"){
+                console.log("Computer also chose Rock. Tied! Try Again")
+            }else if(computerChoice == "Paper"){
+                console.log("Computer chose Paper. You Lose!")
+                computerScore += 1
+            }else{
+                console.log("Computer chose Scissor. You Win!")
+                userScore += 1
+            }
+            break
+        case "Paper":
+            if(computerChoice == "Rock"){
+                console.log("Computer chose Rock. You Win!")
+                userScore += 1
+            }else if(computerChoice == "Paper"){
+                console.log("Computer chose Paper. Tied! Try Again")
+            }else{
+                console.log("Computer chose Scissor. You Lose!")
+                computerScore += 1
+            }
+            break
+        case "Scissor":
+            if(computerChoice == "Rock"){
+                console.log("Computer also chose Rock. You Lose!")
+                computerScore += 1
+            }else if(computerChoice == "Paper"){
+                console.log("Computer chose Paper. You Win!")
+                userScore += 1
+            }else{
+                console.log("Computer chose Scissor. Tied! Try Again")
+            }
+            break
     }
-    if(computerScore > userScore){
-        console.log(`Computer Wins with the final score of ${computerScore} - ${userScore}!`)
-    }else{
-        console.log(`User Wins with the final score of ${userScore} - ${computerScore}!`)
-    }
+    console.log(`Score is Computer ${computerScore} - ${userScore} User`)
+}
+
+function restartGame(){
+    userScore = 0
+    computerScore = 0
+    console.log("........")
+    console.log("Game resetted")
+    console.log(`Score is Computer ${computerScore} - ${userScore} User`)
 }
