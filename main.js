@@ -1,4 +1,5 @@
 let button = document.getElementsByClassName("choice")
+let update = document.querySelector('span')
 
 button = Array.from(button)
 
@@ -18,10 +19,10 @@ button.forEach(btn => {
         result = calculateResult(userChoice,computerChoice)
 
         if(computerScore == 5){
-            console.log(`Computer Wins with the final score of ${computerScore} - ${userScore}!`)
+            document.querySelector('h1').innerHTML = (`Computer Wins with the final score of ${computerScore} - ${userScore}!`)
             restartGame()
         }else if(userScore == 5){
-            console.log(`User Wins with the final score of ${userScore} - ${computerScore}!`)
+            document.querySelector('h1').innerHTML = console.log(`User Wins with the final score of ${userScore} - ${computerScore}!`)
             restartGame()
         }
     })
@@ -47,45 +48,45 @@ function calculateResult(userChoice,computerChoice){
     switch(userChoice){
         case "Rock":
             if(computerChoice == "Rock"){
-                console.log("Computer also chose Rock. Tied! Try Again")
+                update.innerHTML = ("Computer also chose Rock. Tied! Try Again")
             }else if(computerChoice == "Paper"){
-                console.log("Computer chose Paper. You Lose!")
+                update.innerHTML = ("Computer chose Paper. You Lose!")
                 computerScore += 1
             }else{
-                console.log("Computer chose Scissor. You Win!")
+                update.innerHTML = ("Computer chose Scissor. You Win!")
                 userScore += 1
             }
             break
         case "Paper":
             if(computerChoice == "Rock"){
-                console.log("Computer chose Rock. You Win!")
+                update.innerHTML = ("Computer chose Rock. You Win!")
                 userScore += 1
             }else if(computerChoice == "Paper"){
-                console.log("Computer chose Paper. Tied! Try Again")
+                update.innerHTML = ("Computer chose Paper. Tied! Try Again")
             }else{
-                console.log("Computer chose Scissor. You Lose!")
+                update.innerHTML = ("Computer chose Scissor. You Lose!")
                 computerScore += 1
             }
             break
         case "Scissor":
             if(computerChoice == "Rock"){
-                console.log("Computer also chose Rock. You Lose!")
+                update.innerHTML = ("Computer also chose Rock. You Lose!")
                 computerScore += 1
             }else if(computerChoice == "Paper"){
-                console.log("Computer chose Paper. You Win!")
+                update.innerHTML = ("Computer chose Paper. You Win!")
                 userScore += 1
             }else{
-                console.log("Computer chose Scissor. Tied! Try Again")
+                update.innerHTML = ("Computer chose Scissor. Tied! Try Again")
             }
             break
     }
-    console.log(`Score is Computer ${computerScore} - ${userScore} User`)
+    document.querySelector('p').innerHTML = (`Score is Computer ${computerScore} - ${userScore} User`)
 }
 
 function restartGame(){
     userScore = 0
     computerScore = 0
-    console.log("........")
-    console.log("Game resetted")
-    console.log(`Score is Computer ${computerScore} - ${userScore} User`)
+    document.querySelector('h2').innerHTML = ("Game resetted")
+    document.querySelector('p').innerHTML = (`Score is Computer ${computerScore} - ${userScore} User`)
+    document.querySelector('span').innerHTML = ""
 }
